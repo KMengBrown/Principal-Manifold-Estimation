@@ -4,6 +4,8 @@
 ########## Department of Biostatistics, Brown University ###########
 ####################################################################
 
+# Testing Github
+
 ########### Introduction ###########################################
 ####################################################################
 
@@ -474,7 +476,7 @@ PME=function(x.obs, d, N0=0, tuning.para.seq=exp((-15:5)), alpha=0.05, max.comp=
   }
   
   resp=list(embedding.map=f.optimal, 
-            MSD=MSE.seq, 
+            MSD=MSE.seq,  
             knots=centers,
             weights.of.knots=theta.hat,
             coe.kernel=sol.opt[1:I,],
