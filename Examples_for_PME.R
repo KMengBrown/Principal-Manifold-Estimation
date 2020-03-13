@@ -41,7 +41,7 @@ plot(data.points[,1], data.points[,2],
      xlab=" ", ylab=" ")
 lines(x.test[,1],x.test[,2],col="red",type = "l",lwd=3)
 
-  
+
 ### Case II
 
 manifold=function(t){ return(c(cos(t),sin(t)))}
@@ -71,9 +71,9 @@ lines(x.test[,1],x.test[,2],col="red",type = "l",lwd=3)
 
 ### Case III
 
-I=10000                             
+I=1000                             
 t=runif(I, min = -3*pi, max = 3*pi)
-sd.noise=0.2                       
+sd.noise=0.1                       
 e1=rnorm(I,mean = 0,sd=sd.noise)    
 e2=rnorm(I,mean = 0,sd=sd.noise)
 X=matrix(NA,ncol = 2,nrow = I)
@@ -209,16 +209,6 @@ scatter3D(data.points[,1], data.points[,2], data.points[,3],
 scatter3D(x.test[index,1], x.test[index,2],x.test[index,3], 
           pch = 20, box=FALSE, cex = 0.1, colkey = FALSE, col = "grey", 
           border="black", shade=0.8, main=" ",add = TRUE)
-
-par(mar=rep(1,4))
-scatter3D(x.test[,1], x.test[,2],x.test[,3], 
-          pch = 20, box=FALSE, cex = 0.1, colkey = FALSE, col = "grey", 
-          border="black", shade=0.8, main=" ",add = FALSE)
-scatter3D(data.points[,1], data.points[,2], data.points[,3], 
-          pch = 20, box=FALSE, cex = 0.5, colkey = FALSE, 
-          border="black", shade=0.8, 
-          ticktype = "detailed",
-          main="Principal Manifold Estimation", add = TRUE)
 
 
 
