@@ -302,42 +302,42 @@ PME=function(x.obs, d, N0=0, tuning.para.seq=exp((-15:5)), alpha=0.05, max.comp=
   
   for (tuning.ind in 1:length(tuning.para.seq)) {
     
-      print(paste("The tuning parameter is lambda[", as.character(tuning.ind), "] = ", as.character(tuning.para.seq[tuning.ind]), "."))
-      
-      w=tuning.para.seq[tuning.ind]
-      tnew=t.initial
-      T=cbind(rep(1,I),tnew)                                             # The matrix T
-      
-      E=matrix(NA,ncol=I,nrow=I)                                          
-      for(j in 1:I){
-        E.prepare=function(t){ eta.kernel(t-tnew[j,],lambda) }
-        E[,j]=apply(tnew,1,E.prepare)                                     # The matrix E
-      }
-      
-      # This block gives the first step of iteration.
-      ###############################################
-      M1=cbind(2*E%*%W%*%E+2*w*E,2*E%*%W%*%T,T)
-      M2=cbind(2*t(T)%*%W%*%E,2*t(T)%*%W%*%T,matrix(0,ncol=d+1,nrow=d+1))
-      M3=cbind(t(T),matrix(0,ncol=d+1,nrow=d+1),matrix(0,ncol=d+1,nrow=d+1))
-      M=rbind(M1,M2,M3)                                                   # The coefficient matrix of the linear equations
-      
-      b=rbind(2*E%*%W%*%X,2*t(T)%*%W%*%X,matrix(0,nrow=d+1,ncol=D))       # The nonhomogeneous term of the linear equations
-      sol=ginv(M)%*%b                                                     # Solve the linear equations
-      
-      eta.func=function(t){
-        eta.func.prepare=function(tau){ return(eta.kernel(t-tau,lambda)) }
-        return(matrix(apply(tnew,1,eta.func.prepare),ncol=1))
-      }
-      
-      fnew=function(t){                                                    
-        return(as.vector(t(sol[1:I,])%*%eta.func(t)+t(sol[(I+1):(I+d+1),])%*%matrix(c(1,t),ncol=1))) 
-      }
-      
-      # ISOMAP gives the initial projection indices. Then the initial projection indices give the initial manifold f0.
-      # The new projection indices are derived by projecting mu_j's onto f0. 
+    print(paste("The tuning parameter is lambda[", as.character(tuning.ind), "] = ", as.character(tuning.para.seq[tuning.ind]), "."))
     
-      f0=fnew
-      
+    w=tuning.para.seq[tuning.ind]
+    tnew=t.initial
+    T=cbind(rep(1,I),tnew)                                             # The matrix T
+    
+    E=matrix(NA,ncol=I,nrow=I)                                          
+    for(j in 1:I){
+      E.prepare=function(t){ eta.kernel(t-tnew[j,],lambda) }
+      E[,j]=apply(tnew,1,E.prepare)                                     # The matrix E
+    }
+    
+    # This block gives the first step of iteration.
+    ###############################################
+    M1=cbind(2*E%*%W%*%E+2*w*E,2*E%*%W%*%T,T)
+    M2=cbind(2*t(T)%*%W%*%E,2*t(T)%*%W%*%T,matrix(0,ncol=d+1,nrow=d+1))
+    M3=cbind(t(T),matrix(0,ncol=d+1,nrow=d+1),matrix(0,ncol=d+1,nrow=d+1))
+    M=rbind(M1,M2,M3)                                                   # The coefficient matrix of the linear equations
+    
+    b=rbind(2*E%*%W%*%X,2*t(T)%*%W%*%X,matrix(0,nrow=d+1,ncol=D))       # The nonhomogeneous term of the linear equations
+    sol=ginv(M)%*%b                                                     # Solve the linear equations
+    
+    eta.func=function(t){
+      eta.func.prepare=function(tau){ return(eta.kernel(t-tau,lambda)) }
+      return(matrix(apply(tnew,1,eta.func.prepare),ncol=1))
+    }
+    
+    fnew=function(t){                                                    
+      return(as.vector(t(sol[1:I,])%*%eta.func(t)+t(sol[(I+1):(I+d+1),])%*%matrix(c(1,t),ncol=1))) 
+    }
+    
+    # ISOMAP gives the initial projection indices. Then the initial projection indices give the initial manifold f0.
+    # The new projection indices are derived by projecting mu_j's onto f0. 
+    
+    f0=fnew
+    
     X.initial.guess=cbind(X,tnew)                                         # The "tnew" here is derived from ISOMAP.
     projection.index.f0=function(x.init){ projection(x.init[1:D],f0,x.init[(D+1):(D+d)]) }  
     # The first D columns of x.init corresponds to X and the last d columns corresponds to tnew.
@@ -437,31 +437,42 @@ PME=function(x.obs, d, N0=0, tuning.para.seq=exp((-15:5)), alpha=0.05, max.comp=
     SOL[[tuning.ind]]=sol
     TNEW[[tuning.ind]]=tnew
     
+    # To reduce the computational burden, if the MSD in the k-th step of the for-loop is
+    # smaller than that in the next 4 steps of this for-loop (k+1, k+2, k+3, k+4), 
+    # we stop this for-loop. 
+    if(tuning.ind>=5){
+      if(MSE.seq[tuning.ind]>max(MSE.seq[(tuning.ind-4):(tuning.ind-1)])){break}
+    }
+    
   }
-
   
   # The following chunk gives the f_\lambda with the optimal \lambda.
   optimal.ind=min(which(MSE.seq==min(MSE.seq)))
-    sol.opt=SOL[[optimal.ind]]
-    tnew.opt=TNEW[[optimal.ind]]
-    eta.func=function(t){
-      eta.func.prepare=function(tau){ return(eta.kernel(t-tau,lambda)) }
-      return(matrix(apply(tnew.opt,1,eta.func.prepare),ncol=1))
-    }
-    f.optimal=function(t){                                                   
-      return(as.vector(t(sol.opt[1:I,])%*%eta.func(t)+t(sol.opt[(I+1):(I+d+1),])%*%matrix(c(1,t),ncol=1))) 
-    }
+  sol.opt=SOL[[optimal.ind]]
+  tnew.opt=TNEW[[optimal.ind]]
+  eta.func=function(t){
+    eta.func.prepare=function(tau){ return(eta.kernel(t-tau,lambda)) }
+    return(matrix(apply(tnew.opt,1,eta.func.prepare),ncol=1))
+  }
+  f.optimal=function(t){                                                   
+    return(as.vector(t(sol.opt[1:I,])%*%eta.func(t)+t(sol.opt[(I+1):(I+d+1),])%*%matrix(c(1,t),ncol=1))) 
+  }
+  
+  
+  if(print.MSDs==TRUE){
+    plot(log(tuning.para.seq[1:length(MSE.seq)]), MSE.seq, 
+         xlab = "Log Lambda", ylab = "MSD", 
+         type = "l")
+    lines(log(tuning.para.seq[1:length(MSE.seq)]), MSE.seq, 
+          type = "p", pch=20, col="orange", cex=2)
+    abline(v=log(tuning.para.seq[optimal.ind]), lwd=1.5, col="darkgreen", lty=2)
     
-    
-    if(print.MSDs==TRUE){
-      plot(log(tuning.para.seq), MSE.seq, 
-           xlab = "Log Lambda", ylab = "MSD", 
-           type = "l")
-      lines(log(tuning.para.seq), MSE.seq, 
-            type = "p", pch=20, col="orange", cex=2)
-      abline(v=log(tuning.para.seq[optimal.ind]), lwd=1.5, col="darkgreen", lty=2)
-    }
-    
+    print(paste("The optimal tuning parameter is ", 
+                as.character(tuning.para.seq[optimal.ind]), 
+                ", and the MSD of the optimal fit is ",
+                as.character(MSE.seq[optimal.ind]), "."))
+  }
+  
   resp=list(embedding.map=f.optimal, 
             MSD=MSE.seq, 
             knots=centers,
