@@ -441,8 +441,8 @@ PME=function(x.obs, d, N0=0, tuning.para.seq=exp((-15:5)), alpha=0.05, max.comp=
     # To reduce the computational burden, if the MSD in the k-th step of the for-loop is
     # smaller than that in the next 4 steps of this for-loop (k+1, k+2, k+3, k+4), 
     # we stop this for-loop. 
-    if(tuning.ind>=5){
-      if(MSE.seq[tuning.ind]>max(MSE.seq[(tuning.ind-4):(tuning.ind-1)])){break}
+    if(tuning.ind>=4){
+      if((MSE.seq[tuning.ind]>MSE.seq[tuning.ind-1])&(MSE.seq[tuning.ind-1]>MSE.seq[tuning.ind-2])&(MSE.seq[tuning.ind-2]>MSE.seq[tuning.ind-3])){break}
     }
     
   }
