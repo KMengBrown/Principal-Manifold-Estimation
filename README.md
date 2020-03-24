@@ -36,3 +36,7 @@ Brown University
 T. Hastie and W. Stuetzle. Principal curves. Journal of the American Statistical Association, 84(406): 502-516, 1989
 
 J. B. Tenenbaum, V. De Silva, and J. C. Langford. A global geometric framework for nonlinear dimensionality reduction. science, 290(5500):2319-2323, 2000.
+
+## "Graphical_Output_of_Examples.pdf"
+
+![alt text](https://github.com/KMengBrown/Principal-Manifold-Estimation/blob/master/Graphical_Output_of_Examples.pdf)
