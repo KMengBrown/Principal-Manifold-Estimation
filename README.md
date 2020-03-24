@@ -1,10 +1,20 @@
 # Principal-Manifold-Estimation
 
-This repository is devoted to the principal manifold estimation (PME) algorithm. The PME algorithm comes from the paper "Principal Manifolds: A Framework and Model Complexity Selection" by Kun Meng and Ani Eloyan (hereafter ME). This paper is available at https://arxiv.org/pdf/1711.06746.pdf. 
+Description: This repository is devoted to the principal manifold estimation (PME) algorithm. The PME algorithm comes from the paper "Principal Manifolds: A Framework and Model Complexity Selection" by Kun Meng and Ani Eloyan (hereafter ME). This paper is available at https://arxiv.org/pdf/1711.06746.pdf. 
+
+Depends R (>= 3.0)
 
 In addition to this "README" file, there four files in this repository.
 
 1. "Principal_Manifold_Estimation.R": This file contains the functions "hdmde" and "PME." The "hdmde" function implements the high-dimensional mixture density estimation (HDMDE) presented in Algorithm 1 of ME, and the "PME" function implements the principal manifold estimation presented in Algorithm 2 of ME. 
+
+The syntax of PME:
+```r
+result=PME(x.obs=data_points, d=intrinsic_dimension, N0=0, tuning.para.seq=exp((-15:5)), alpha=0.05, max.comp=100, epsilon=0.05, max.iter=100, print.MSDs=TRUE)
+# "data_points" is an n-by-D matrix, each row of which denotes a D-dimensional data point.
+# "intrinsic_dimension": is the dimension of the potentially interested underlying manifold.
+# More details are provided in the "Principal_Manifold_Estimation.R" file.
+```
 
 2. "Examples_for_PME.R": This file presents six simulated examples with dimension pairs (d=1, D=2), (d=1,D=3), and (d=2,D=3) to demonstrate the performance of PME.
 
