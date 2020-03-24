@@ -1,8 +1,10 @@
 # Principal-Manifold-Estimation
 
-Description: This repository is devoted to the principal manifold estimation (PME) algorithm. The PME algorithm comes from the paper "Principal Manifolds: A Framework and Model Complexity Selection" by Kun Meng and Ani Eloyan (hereafter ME). This paper is available at https://arxiv.org/pdf/1711.06746.pdf. 
+* Description: This repository is devoted to the principal manifold estimation (PME) algorithm. The PME algorithm comes from the paper "Principal Manifolds: A Framework and Model Complexity Selection" by Kun Meng and Ani Eloyan (hereafter ME). This paper is available at https://arxiv.org/pdf/1711.06746.pdf. 
 
-Depends R (>= 3.0)
+* Depends R (>= 3.0)
+
+* Maintainer: Kun Meng <kun_meng@brown.edu> 
 
 In addition to this "README" file, there four files in this repository.
 
