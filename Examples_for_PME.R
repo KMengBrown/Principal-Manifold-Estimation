@@ -1,8 +1,8 @@
 ####################################################################
-##########              A Simulation Study of            ###########
-##########    Principal Manifolds Estimation Algorithm   ###########
+##########      A Demonstration of PME Using Examples    ###########
 ##########               Kun (Michael) Meng              ###########
-########## Department of Biostatistics, Brown University ###########
+##########        Department of Biostatistics            ###########
+##########               Brown University                ###########
 ####################################################################
 
 # install.packages("plot3D")
