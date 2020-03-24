@@ -37,3 +37,10 @@ T. Hastie and W. Stuetzle. Principal curves. Journal of the American Statistical
 
 J. B. Tenenbaum, V. De Silva, and J. C. Langford. A global geometric framework for nonlinear dimensionality reduction. science, 290(5500):2319-2323, 2000.
 
+## Definition of Principal Manifolds
+
+Let $X$ be a random $D$-vector associated with the probability measure or density function $\mathbb{P}$ such that $X$ has finite second moments. Let $f,g\in C_\infty\bigcap \nabla^{-\otimes 2}L^2(\R^d\rightarrow\R^D)$ and $\lambda\in[0,\infty]$, we define the following functionals
+	
+	$$\mathcal{K}_{\lambda,\mathbb{P}}(f,g)=\mathbb{E}\left\Vert X-f\left(\pi_g(X)\right)\right\Vert^2_{\mathbb{R}^D}+\lambda\left\Vert\nabla^{\otimes 2}f\right\Vert_{L^2(\mathbb{R}^d)}^2, \ \ \ \ \mathcal{K}_{\lambda,\mathbb{P}}(f)=\mathcal{K}_{\lambda,\mathbb{P}}(f,f),$$
+	where $\Vert\nabla^{\otimes 2}f\Vert_{L^2(\mathbb{R}^d)}^2$ is called the bending energy term. A manifold $M_{f^*}^d$ determined by $f^*$ is called a principal manifold for $X$ (or $\mathbb{P}$) with the tuning parameter $\lambda$ if $f^*=\arg\min_{f}\{\mathcal{K}_{\lambda,\mathbb{P}}(f):f\in C_\infty\bigcap \nabla^{-\otimes 2}L^2(\R^d\rightarrow\R^D)\}$.
+
