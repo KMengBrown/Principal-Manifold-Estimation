@@ -267,7 +267,7 @@ PME=function(x.obs, d, N0=0, tuning.para.seq=exp((-15:5)), alpha=0.05, max.comp=
   #         There are n observations, and each observation is a D-dimensional point.
   #         x.obs is a n-by-D matrix.
   # "d" is the intrinsic dimension of the underlying manifold
-  # "N0" is a predetermined lower bound for N - the number of density components, default value is 30*d
+  # "N0" is a predetermined lower bound for N - the number of density components, default value is 20*D
   # "tuning.para.seq" is a vector of tuning parameter candidates, its default value is exp((-15:5)).
   #                   If you would like to fit a manifold for a specific lambda, set tuning.prar.seq=c(lambda).
   # "alpha" is the pre-determined confidence level, which determines the number of the components in a mixture density.
