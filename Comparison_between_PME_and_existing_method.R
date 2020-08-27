@@ -41,8 +41,10 @@ for(kkk in 1:N){
   
   # HS
   print("HS")
-  fit=principal_curve(X, thresh = 0, trace = FALSE, maxit = 500, smoother = "smooth_spline")
-  MSD.HS[kkk]=fit$dist/I
+  fit_smooth=principal_curve(X, thresh = 0, trace = FALSE, maxit = 500, smoother = "smooth_spline")
+  fit_lowess=principal_curve(X, thresh = 0, trace = FALSE, maxit = 500, smoother = "lowess")
+  fit_periodic=principal_curve(X, thresh = 0, trace = FALSE, maxit = 500, smoother = "periodic_lowess")
+  MSD.HS[kkk]=min(c(fit_smooth$dist/I, fit_lowess$dist/I, fit_periodic$dist/I))
   
   # ISOMAP
   print("ISOMAP")
