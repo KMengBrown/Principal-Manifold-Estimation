@@ -25,9 +25,10 @@ result=PME(x.obs=data_points, d=intrinsic_dimension, N0=0, tuning.para.seq=exp((
 4. "Comparison_between_PME_and_existing_method.R": This file reproduces the simulation study in Figure 6 (b) of ME, comparing PME, HS, and ISOMAP. We measure the performances of these three methods using mean squared distance (MSD). In this file, for simplicity, we do only ten simulations. The corresponding output is the ten MSDs of each method, say 30 numbers in a 10-by-3 matrix. HS stands for the HS principal curve algorithm in Hastie and Stuetzle
 (1989). In this file, we apply the "principal_curve" function to perform HS. ISOMAP is based on Tenenbaum et al. (2000) and is implemented using the "isomap" function. 
 
-Kun (Michael) Meng,
 
-Ph.D. Student,
+Kun (Michael) Meng, 
+
+Ph.D. Candidate,
 Department of Biostatistics, 
 Brown University
 
