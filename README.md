@@ -6,7 +6,7 @@
 
 * Maintainer: Kun Meng <kun_meng@brown.edu> 
 
-In addition to this "README" file, there four files in this repository.
+In addition to this "README" file, there are four files in this repository.
 
 1. "Principal_Manifold_Estimation.R": This file contains the functions "hdmde" and "PME." The "hdmde" function implements the high-dimensional mixture density estimation (HDMDE) presented in Algorithm 1 of ME, and the "PME" function implements the principal manifold estimation presented in Algorithm 2 of ME. 
 
