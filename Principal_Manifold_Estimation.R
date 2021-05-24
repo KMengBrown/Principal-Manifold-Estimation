@@ -261,7 +261,7 @@ hdmde=function(x.obs, N0, alpha, max.comp){
 ############ Section 3, Principal Manifold Estimation ######################
 ############################################################################
 
-PME=function(x.obs, d, N0=0, tuning.para.seq=exp((-15:5)), alpha=0.05, max.comp=100, epsilon=0.05, max.iter=100, print.MSDs=TRUE){
+PME=function(x.obs, d, N0=20*D, tuning.para.seq=exp((-15:5)), alpha=0.05, max.comp=100, epsilon=0.05, max.iter=100, print.MSDs=TRUE){
   
   # "x.obs" is the data set of interest. 
   #         There are n observations, and each observation is a D-dimensional point.
