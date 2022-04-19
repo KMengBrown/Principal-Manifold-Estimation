@@ -28,10 +28,9 @@ result=PME(x.obs=data_points, d=intrinsic_dimension, N0=0, tuning.para.seq=exp((
 (1989). In this file, we apply the "principal_curve" function to perform HS. ISOMAP is based on Tenenbaum et al. (2000) and is implemented using the "isomap" function. 
 
 
-Kun (Michael) Meng, 
-
-Ph.D. Candidate,
-Department of Biostatistics, 
+Kun Meng, Ph.D. \
+(Michael) \
+Department of Biostatistics, \
 Brown University
 
 ## References
